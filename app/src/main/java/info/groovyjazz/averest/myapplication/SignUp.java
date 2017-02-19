@@ -1,7 +1,11 @@
 package info.groovyjazz.averest.myapplication;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +25,8 @@ public class SignUp extends AppCompatActivity {
     private EditText namEditText, userEditText, passEditText;
     private ImageView imageView;
     private Button button;
-    private String nameString, userString, passString;
+    private String nameString, userString, passString,
+            pathImageString, nameImageString;
     private Uri uri;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -59,11 +64,25 @@ public class SignUp extends AppCompatActivity {
             uri = data.getData();
             try {
 
-
-
+                Bitmap bitmap= BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                imageView.setImageBitmap(bitmap);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            //Find image path
+            String[] strings = new String[]{MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(uri,strings, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                pathImageString=cursor.getString(index);
+            } else {
+                pathImageString=uri.getPath();
+            }
+
+            Log.d("19febV1","PathIamge ==> "+ pathImageString);
+
         } // IF
 
     } //onActivityResult
