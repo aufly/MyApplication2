@@ -28,6 +28,7 @@ public class SignUp extends AppCompatActivity {
     private String nameString, userString, passString,
             pathImageString, nameImageString;
     private Uri uri;
+    private boolean aBoolean=true;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -59,7 +60,7 @@ public class SignUp extends AppCompatActivity {
         if (resultCode==RESULT_OK) {
             // SUCCESS CHOOSE IMAGE
             Log.d("18FebV1","Result OK");
-
+            aBoolean=false;
             //Choose Image to Show
             uri = data.getData();
             try {
@@ -111,6 +112,7 @@ public class SignUp extends AppCompatActivity {
                 userString=userEditText.getText().toString().trim();
                 passString=passEditText.getText().toString().trim();
 
+
                 // Chk space
                 if (nameString.length() == 0 ||
                         userString.length() == 0 ||
@@ -118,6 +120,12 @@ public class SignUp extends AppCompatActivity {
                     Log.d("18FebV1","Have Space");
                     MyAlert myAlert = new MyAlert(SignUp.this);
                     myAlert.myDialog("Have Space","บรรทัด 2");
+
+                } else if (aBoolean==true) {
+                    // non choose image
+                    MyAlert myAlert = new MyAlert(SignUp.this);
+                    myAlert.myDialog("ยังไม่เลือกรูป","โปรแเลือกรูป");
+                } else {
 
                 }
 
