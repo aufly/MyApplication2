@@ -106,7 +106,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Get Value from Edit Text
+                //Get Value from Edit Text ccc
                 nameString=namEditText.getText().toString().trim();
                 userString=userEditText.getText().toString().trim();
                 passString=passEditText.getText().toString().trim();
